@@ -17,3 +17,5 @@ provider "google" {
   region  = "europe-north1"
   zone    = "europe-north1-a"
 }
+
+data "google_client_config" "current" {}
