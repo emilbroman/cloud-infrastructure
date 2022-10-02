@@ -7,6 +7,10 @@ resource "google_container_cluster" "this" {
   logging_config {
     enable_components = []
   }
+
+  workload_identity_config {
+    workload_pool = "${data.google_client_config.current.project}.svc.id.goog"
+  }
 }
 
 resource "google_container_node_pool" "this" {
@@ -26,5 +30,9 @@ resource "google_container_node_pool" "this" {
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
+
+    workload_metadata_config {
+      mode = "GKE_METADATA"
+    }
   }
 }
